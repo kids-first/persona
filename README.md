@@ -8,17 +8,17 @@
 
 ## usage
 
-persona's main export is an express router, to be included in a parent application. an example instantiation is included in `examples/app.ts`, which is hooked up to the `npm start` script mentioned in the dev section below.
+Persona's main export is an express router, to be included in a parent application. an example instantiation is included in `examples/app.ts`, which is hooked up to the `npm start` script mentioned in the dev section below.
 
 #### getting started
 
-* `npm i --save @kids-first/persona`
+* `npm i --save @kfpersona/persona`
 * add the required environment variables, documented in `.env.schema`
 
 ```
 import * as express from 'express';
 import * as cors from 'cors';
-import createServer from '@kids-first/persona';
+import createServer from '@kfpersona/persona';
 
 const start = async () => {
   const port = 3232;
