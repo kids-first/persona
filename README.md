@@ -12,13 +12,13 @@ persona's main export is an express router, to be included in a parent applicati
 
 #### getting started
 
-* `npm i --save @overture-stack/persona`
+* `npm i --save @kids-first/persona`
 * add the required environment variables, documented in `.env.schema`
 
 ```
 import * as express from 'express';
 import * as cors from 'cors';
-import createServer from '@overture-stack/persona';
+import createServer from '@kids-first/persona';
 
 const start = async () => {
   const port = 3232;
