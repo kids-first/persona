@@ -1,6 +1,6 @@
 {
 	"name": "@kfpersona/persona",
-	"version": "1.2.2",
+	"version": "1.2.3",
 	"description": "🚧 user profile and identity management",
 	"main": "dist/index.js",
 	"bin": {
@@ -78,5 +78,6 @@
 	},
 	"directories": {
 		"example": "examples"
-	}
+	},
+	"files": [ "dist" ]
 }
