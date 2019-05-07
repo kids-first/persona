@@ -1,7 +1,7 @@
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
 import * as graphqlHTTP from 'express-graphql';
-import egoTokenMiddleware from 'ego-token-middleware';
+import egoTokenMiddleware from 'kfego-token-middleware';
 import { get } from 'lodash';
 
 import createSchema from './graphql';
