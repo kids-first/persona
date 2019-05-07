@@ -1,6 +1,6 @@
 {
 	"name": "@kfpersona/persona",
-	"version": "1.2.3",
+	"version": "1.2.4",
 	"description": "🚧 user profile and identity management",
 	"main": "dist/index.js",
 	"bin": {
@@ -35,13 +35,13 @@
 		"cors": "^2.8.4",
 		"detect-installed": "^2.0.4",
 		"dotenv": "^4.0.0",
-		"ego-token-middleware": "1.0.1",
 		"express": "^4.16.2",
 		"express-graphql": "^0.6.11",
 		"graphql": "^0.11.7",
 		"graphql-compose": "^4.0.1",
 		"graphql-compose-mongoose": "^4.1.0",
 		"graphql-compose-pagination": "^3.0.1",
+		"kfego-token-middleware": "^1.1.0",
 		"lodash": "^4.17.10",
 		"minimist": "^1.2.0",
 		"minimist-string": "^1.0.2",
@@ -67,10 +67,26 @@
 		"transform": {
 			"^.+\\.tsx?$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
 		},
-		"testMatch": [ "<rootDir>/**/__tests__/**/*.(js|jsx|ts|tsx)", "<rootDir>/**/?(*.)(spec|test).(js|jsx|ts|tsx)" ],
-		"testPathIgnorePatterns": [ "/node_modules/", "/fixtures/", "setupJest.js" ],
-		"moduleDirectories": [ "node_modules", "./" ],
-		"moduleFileExtensions": [ "ts", "tsx", "js", "jsx", "json" ]
+		"testMatch": [
+			"<rootDir>/**/__tests__/**/*.(js|jsx|ts|tsx)",
+			"<rootDir>/**/?(*.)(spec|test).(js|jsx|ts|tsx)"
+		],
+		"testPathIgnorePatterns": [
+			"/node_modules/",
+			"/fixtures/",
+			"setupJest.js"
+		],
+		"moduleDirectories": [
+			"node_modules",
+			"./"
+		],
+		"moduleFileExtensions": [
+			"ts",
+			"tsx",
+			"js",
+			"jsx",
+			"json"
+		]
 	},
 	"prettier": {
 		"trailingComma": "all",
@@ -79,5 +95,7 @@
 	"directories": {
 		"example": "examples"
 	},
-	"files": [ "dist" ]
+	"files": [
+		"dist"
+	]
 }
