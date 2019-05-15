@@ -1,6 +1,6 @@
 {
-  "name": "@kfpersona-stack/persona",
-  "version": "1.2.5",
+  "name": "@kfpersona/persona",
+  "version": "1.2.4",
   "description": "🚧 user profile and identity management",
   "main": "dist/index.js",
   "bin": {
