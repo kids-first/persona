@@ -1,6 +1,6 @@
 {
-  "name": "@overture-stack/persona",
-  "version": "1.0.1",
+  "name": "@kfpersona-stack/persona",
+  "version": "1.2.5",
   "description": "🚧 user profile and identity management",
   "main": "dist/index.js",
   "bin": {
@@ -10,19 +10,22 @@
     "start": "NODE_PATH=./ ts-node examples/app.ts",
     "test": "NODE_PATH=./ jest .test --notify",
     "build": "rm -rf dist && mkdir dist && NODE_PATH=./ tsc",
-    "prepare": "rm -rf dist && mkdir dist && NODE_PATH=./ tsc"
+    "prepare": "rm -rf dist && mkdir dist && NODE_PATH=./ tsc",
+    "dev": "concurrently --kill-others \"npm run watch\" \"npm run demon\"",
+    "demon": "NODE_PATH=./ nodemon dist/examples/app.js",
+    "watch": "NODE_PATH=./ tsc -w"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/overture-stack/persona.git"
+    "url": "git+https://github.com/kids-first/persona.git"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "SEE LICENSE IN LICENSE",
   "bugs": {
-    "url": "https://github.com/overture-stack/persona/issues"
+    "url": "https://github.com/kids-first/persona/issues"
   },
-  "homepage": "https://github.com/overture-stack/persona#readme",
+  "homepage": "https://github.com/kids-first/persona#readme",
   "peerDependencies": {
     "migrate-mongo": "^3.0.2"
   },
@@ -32,13 +35,13 @@
     "cors": "^2.8.4",
     "detect-installed": "^2.0.4",
     "dotenv": "^4.0.0",
-    "ego-token-middleware": "1.0.1",
     "express": "^4.16.2",
     "express-graphql": "^0.6.11",
     "graphql": "^0.11.7",
     "graphql-compose": "^4.0.1",
     "graphql-compose-mongoose": "^4.1.0",
     "graphql-compose-pagination": "^3.0.1",
+    "kfego-token-middleware": "^1.1.0",
     "lodash": "^4.17.10",
     "minimist": "^1.2.0",
     "minimist-string": "^1.0.2",
@@ -53,6 +56,7 @@
   },
   "devDependencies": {
     "@types/jest": "^21.1.6",
+    "concurrently": "^4.0.1",
     "jest": "^21.2.1",
     "moxios": "^0.4.0",
     "nodemon": "^1.12.1",
@@ -87,5 +91,8 @@
   "prettier": {
     "trailingComma": "all",
     "singleQuote": true
+  },
+  "directories": {
+    "example": "examples"
   }
 }
