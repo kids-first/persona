@@ -4,15 +4,14 @@ import * as graphqlHTTP from 'express-graphql';
 import egoTokenMiddleware from 'kfego-token-middleware';
 import { get } from 'lodash';
 
-import createSchema from './graphql';
+import {reCreateSchema} from './graphql';
 import connect from './services/mongo';
-import getSecrets from './services/vault';
 import generateModels from './models/generateModels';
 import { egoApi } from './config';
 
 export default async ({ ego, schemas, tags }) => {
   await connect();
-  const graphqlSchema = createSchema({ models: generateModels(schemas), tags });
+  const createSchema = reCreateSchema({ models: generateModels(schemas), tags });
 
   const app = express();
 
@@ -27,7 +26,7 @@ export default async ({ ego, schemas, tags }) => {
     '/graphql',
     bodyParser.json(),
     graphqlHTTP((err, res) => ({
-      schema: graphqlSchema,
+      schema: createSchema(res.req.body.query.replace(/#.*\n/g, "").split("\"")[1]),
       formatError: err => {
         res.status(err.status || 500);
         return err;
