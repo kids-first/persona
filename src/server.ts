@@ -26,7 +26,13 @@ export default async ({ ego, schemas, tags }) => {
     '/graphql',
     bodyParser.json(),
     graphqlHTTP((err, res) => ({
-      schema: createSchema(res.req.body.query.replace(/#.*\n/g, "").split("\"")[1]),
+      schema: createSchema(
+          (() => {
+            const query = res.req.body.query.replace(/#.*\n/g, "");
+            const regexMatch = /user\(_id:\s*"(\w*)"/gi.exec(query);
+            return (regexMatch && regexMatch[1]) ? regexMatch[1] : null;
+          })()
+        ),
       formatError: err => {
         res.status(err.status || 500);
         return err;
