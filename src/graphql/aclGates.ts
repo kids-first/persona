@@ -1,4 +1,7 @@
 import { get } from 'lodash';
+import {mongoDb, mongoHost} from "../config";
+import {ObjectId, MongoClient} from "mongodb";
+import {throws} from "assert"; // https://stackoverflow.com/questions/4902569/node-js-mongodb-select-document-by-id-node-mongodb-native
 
 const APPROVED_STATUS = 'Approved'.toLowerCase();
 
@@ -17,6 +20,17 @@ const isSelf = models => async ({ args, context }) => {
   const _id = args._id || args.record._id;
   const egoId = await models.User.findOne({ _id }).then(user => user.egoId);
   return `${egoId}` === `${context.jwt.sub}`;
+};
+
+/**
+ * Is the requestedID the _id of a public profile?
+ *
+ * @param requestedID
+ */
+const isPublicProfile = async function (models, requestedID) {
+  const isPublic = await models.User.findOne({"_id": new ObjectId(requestedID)}).then(doc => doc.isPublic);
+
+  return (typeof isPublic === "undefined" || isPublic === null) ? false : isPublic;  //if we don't have a isPublic field, undefined
 };
 
 const defaultErrorMessage = 'Access denied';
@@ -41,11 +55,29 @@ export const selfGate = ({ models, errMsg = defaultErrorMessage }) => async ({
     throw new Error(errMsg);
   }
 };
+
 export const adminOrAppGate = ({ errMsg = defaultErrorMessage }) => async ({
   context: { jwt },
 }) => {
   const passesGate =
     isAdmin({ context: { jwt } }) || isApplication({ context: { jwt } });
+
+  if (!passesGate) {
+    throw new Error(errMsg);
+  }
+};
+
+/**
+ * Returns true if user is an admin, an app, or if we're asking about a user whose profile is public
+ *
+ * Otherwise, throws an Error
+ *
+ * @param errMsg
+ */
+export const adminOrAppOrPublicGate = ({ models, requestedID, errMsg = defaultErrorMessage }) => async ({
+ context: { jwt },
+}) => {
+  const passesGate = isAdmin({ context: { jwt } }) || isApplication({ context: { jwt } }) || (await isPublicProfile(models, requestedID));
 
   if (!passesGate) {
     throw new Error(errMsg);
