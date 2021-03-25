@@ -45,7 +45,7 @@
 		"lodash": "^4.17.10",
 		"minimist": "^1.2.0",
 		"minimist-string": "^1.0.2",
-		"mongoose": "^4.13.1",
+		"mongoose": "^5.12.2",
 		"ms": "^2.0.0",
 		"node-vault": "^0.8.0",
 		"portfinder": "^1.0.13",
